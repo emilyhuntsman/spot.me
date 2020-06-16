@@ -1,0 +1,32 @@
+#container {
+    display: flex;
+    flex-direction: row;
+}
+
+#container section {
+    width: 33%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    width: 80%;
+    height: auto;
+    border: none;
+    display: block;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+}
+
+#container {
+    margin-top: 30px;
+}
+
+h3 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
