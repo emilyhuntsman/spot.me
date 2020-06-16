@@ -1,7 +1,4 @@
 
-const userAccessToken = "BQAjK7-JKbs1PI98XnLQNfsyzR1EatxVZDTU0Ml5NB_-_Yt5g7GPlSg3DisFF0zUTQGvNBnCoZIWRqP4KpFHBbgQDVTrwgsCfcz0LcHanXFTSvuhkG_OoRomZegsH_gRldBkZagIZE6Yup8";
-let artistId = null;
-const artistQuery = "q='haim'&type=artist";
 const display = () => {
     $('img').remove();
     $('ul').empty();
@@ -15,17 +12,23 @@ const display = () => {
     $('h3').text("classified as: ")
 }
 
-$(() => {
-    
-
-});
-
-
+// use seed artists, check if there are any common genres between, if so, use as 4th and or 5th seed; set limit as 5
+// use a slider for tuneable track attributes? ex popularity, energy, acousticness
+// figure out how to add web player?
 
 const getInfo = (artist,uList,section) => {
+
+    const userAccessToken = "BQArclFEu9MQgXEujIkmK4sHF_asGXCZ8QdlgLKNSw6zKzFMyNkZR9tvkWyfJ52QnR8qBgTP10nUtUScwo2OlNH9vmsFkyIY_m3lsM5KOBAP4-RGBB7ARSPy478xp4PfT4kJU8mNQ6PA2C4";
+
+    const client_id = "2483a99e8ce64d8fa66813fae67f3610";
+    const client_secret = "8b0d5cb1f93841258b4bc00e100eec8f";
+    const redirect_uri = "https%3A%2F%2Froot2point0.github.io%2Fspot.me";
+    const scopes = "user-read-private user-read-email";
+
+
     // let userAccessToken = null;
     // $.ajax ({
-    //     url: "https://accounts.spotify.com/authorize?client_id=2483a99e8ce64d8fa66813fae67f3610&scopes=playlist-read-private&response_type=code&redirect_uri=https%3A%2F%2Fgithub.com%2F",
+    //     url: `https://accounts.spotify.com/authorize?client_id=${client_id}&scopes=${scopes}&response_type=code&redirect_uri=${redirect_uri}`,
     //     success: function (data) {
     //         userAccessToken = data.code;
     //     }
