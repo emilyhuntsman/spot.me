@@ -49,7 +49,6 @@ const getInfo = (artist,uList,section) => {
                     console.log(data);
                     for (let genre of data.genres) {
                         const $li = $('<li>').text(genre);
-                        //console.log(header.children()[3]);
                         (uList).append($li);
                     }
                     const $img = $('<img>').attr("src",data.images[0].url).attr("id","picture");
