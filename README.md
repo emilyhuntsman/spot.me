@@ -10,6 +10,7 @@ use artists id, common artist genres as seeds for recommendations
 allow user preferences to be used as criteria through sliders
 return list of five songs generated using API
 include web player
+carosel for recs
 
 ask about code organization
 naming of gihub account right now

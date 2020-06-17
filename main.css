@@ -33,10 +33,6 @@
     transform: translate(137px);
 }
 
-/* #a2Img, #a2Img, #a3Img {
-    transform: translate(0,-7px);
-} */
-
 #container section {
     width: 33%;
     height: auto;
@@ -54,6 +50,7 @@ img {
 section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 #container {
