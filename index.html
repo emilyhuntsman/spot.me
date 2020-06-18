@@ -9,19 +9,33 @@
     <title>Spot.Me</title>
 </head>
 <body>
-    <h1 id="top">spot.me</h1>
-    <div class="center">
-        <div id="circle"></div>
+    <div id="menu-container">
     </div>
+    <div id="instructions">
+        <marquee>
+            enter three of your favorite artists below to receive a personalized playlist
+        </marquee>
+    </div>
+    <section id="logo">
+        <h1 id="top">spot.me</h1>
+        <div class="center">
+            <div id="circle"></div>
+        </div>
+    </section>
     <section id="input">
         <form>
-            <label>first artist: <input type="text" id="first"/></label>
-            <label>second artist: <input type="text" id="second"/></label>
-            <label>third artist: <input type="text" id="third"/></label>
+            <input type="text" id="first"/>
+            <input type="text" id="second"/>
+            <input type="text" id="third"/>
         </form>
         <button id="submit" onclick="display()">Submit</button>
     </section>
-    <div id="container">
+    <div class="container">
+        <div id="faves">
+            <h2>Your Artists</h2>
+        </div>
+    </div>
+    <div class="container" id="three-artists">
         <section id="a1">
             <h1 id="a1Header"></h1>
             <img id="a1Img">
@@ -41,7 +55,9 @@
             <ul id="a3List"></ul>
         </section>
     </div>
-    <div id="recs">
+    <hr>
+    <div class="playlist container">
+        <div id="recs"></div>
     </div>
 </body>
 </html>
