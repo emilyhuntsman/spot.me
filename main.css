@@ -1,46 +1,121 @@
 #top {
-    font-size: 175%;
+    font-size: 250%;
     text-align: center;
+}
+
+marquee {
+    background-color: rgb(222, 237, 222);
+    color: black;
+    height: 30px;
+    padding-top: 8px;
+}
+
+form {
+    display: inline;
 }
 
 .center {
     display: flex;
     justify-content: center;
+    height: 45px;
 }
 
 #circle {
-    width: 50px;
-    height: 50px;
+    width: 63px;
+    height: 63px;
     border-radius: 50%;
-    border: 2px solid rgb(195, 237, 250); 
-    transform: translate(-1px,-57px);
+    border: 2px solid rgb(91, 200, 91); 
+    transform: translate(-1px,-86px);
 
 }
 
-#container {
+.container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    background-color: rgb(222, 237, 222);
 }
+
+.playlist {
+    padding-top: 30px;
+    background-color: white;
+    flex-direction: column; 
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+#faves, #recs {
+    justify-content: center;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 7px;
+    background-color: white;
+    border: solid #a1ab95 .1em;
+    margin: 15px;
+    width: fit-content;
+    text-align: center;
+}
+
+/* #recs {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: fit-content;
+} */
+
+#recs {
+    margin: 0 auto;
+}
+
+#recs ul {
+    text-align: left;
+    width: fit-content;
+}
+
+#recs h2 {
+    width: 150px;
+}
+
+#three-artists {
+    padding-top: 30px;
+}
+
+
 
 #input {
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
 }
 
 #submit {
     width: 60px;
-    text-align: left;
-    margin: 5px;
-    transform: translate(137px);
+    display: inline;
+    /* text-align: left; */
+    /* margin: 5px; */
+    margin-bottom: 10px;
+    margin-left: 7px;
 }
 
-#container section {
+#a1, #a2, #a3 {
     width: 33%;
     height: auto;
     display: flex;
     justify-content: center;
+    text-align: center;
+}
+
+#three-artists ul {
+    list-style-type: none;
+    padding: 0px;
 }
 
 img {
+    margin-left: auto;
+    margin-right: auto;
     width: 80%;
     height: auto;
     border: none;
@@ -51,10 +126,6 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-#container {
-    margin-top: 30px;
 }
 
 h3 {
