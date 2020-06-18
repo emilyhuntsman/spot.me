@@ -10,6 +10,23 @@ const getUserAccessToken = (client_64) => {
     return (resp);
 }
 
+const populatePage = (userAccessToken,artistList) => {
+    $('img').remove();
+    $('ul').empty();
+    $('#a1Header').text($('#first').val());
+    $('#a2Header').text($('#second').val());
+    $('#a3Header').text($('#third').val());
+    // first artist call
+    artistList.push(getInfo(userAccessToken,($('#first').val()),$('#a1List'),$('#a1')));
+    // second artist call
+    artistList.push(getInfo(userAccessToken,($('#second').val()),$('#a2List'),$('#a2')));
+    // third artist call
+    artistList.push(getInfo(userAccessToken,($('#third').val()),$('#a3List'),$('#a3')));
+    // clearing input fields
+    $('input').val("");
+    $('h3').text("classified as: ");
+}
+
 const getInfo = (userAccessToken,artist,uList,section) => {
     let toReturn = { name: artist, idNum: null, idGenres: [] };
     artist = artist.replace(/ /g,"%20");
@@ -32,43 +49,40 @@ const getInfo = (userAccessToken,artist,uList,section) => {
     return (toReturn);
 }
 
+const getRecs = (userAccessToken,idList,seedG) => {
+    $.ajax({
+        url: `https://api.spotify.com/v1/recommendations?limit=10&max_popularity=60&seed_artists=${idList[0]},${idList[1]},${idList[2]}&seed_genres=${seedG[0]},${seedG[1]}`,
+        beforeSend: (xhr) => {
+            xhr.setRequestHeader("Authorization", `Bearer ${userAccessToken}`)
+        }, success: (data) => {
+            $('#recs').empty();
+            $('#recs').append($('<h1>').text("Your custom playlist..."));
+            const $ul= $('<ul>');
+            $('#recs').append($ul);
+            for (let track of data.tracks){
+                $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
+            }
+        }
+    })
+}
+
 
 const display = () => {
     const client_64 = "MjQ4M2E5OWU4Y2U2NGQ4ZmE2NjgxM2ZhZTY3ZjM2MTA6OGIwZDVjYjFmOTM4NDEyNThiNGJjMDBlMTAwZWVjOGY=";
     let artistList = [];
-    //let seeds = { ids: [], genres: [] };
-    //let tempSeeds = { ids: [], genres: [] };
+    let idList = [ "1r1uxoy19fzMxunt3ONAkG", "3RcaUsjj5gt1x2QK3TSNS2", "07D1Bjaof0NFlU32KXiqUP" ];
+    let seedG = ["indie-pop","sad"];
     getUserAccessToken(client_64).then((response) => {   
         const userAccessToken = response.access_token; 
-        $('img').remove();
-        $('ul').empty();
-        $('#a1Header').text($('#first').val());
-        $('#a2Header').text($('#second').val());
-        $('#a3Header').text($('#third').val());
+        populatePage(userAccessToken,artistList);
+        getRecs(userAccessToken,idList,seedG);
 
-        
-        artistList.push(getInfo(userAccessToken,($('#first').val()),$('#a1List'),$('#a1')));
-
-        artistList.push(getInfo(userAccessToken,($('#second').val()),$('#a2List'),$('#a2')));
-
-        artistList.push(getInfo(userAccessToken,($('#third').val()),$('#a3List'),$('#a3')));
-
-        // for (let i = 0; i< artistList.length; i++){
-        //     console.log(artistList[i].idNum);
+        //console.log(artistList);
+        // for (let a of artistList){
+        //     console.log("name "+a.name);
+        //     console.log("id "+a.idNum);
+        //     console.log(a.idGenres);
         // }
 
-        console.log(artistList);
-        for (let a of artistList){
-            console.log("name "+a.name);
-            console.log("id "+a.idNum);
-            console.log(a.idGenres);
-        }
-
-        // console.log(tempSeeds);
-        // seeds.ids.push(tempSeeds.id);
-        // for (let g of tempSeeds.idGenres) {seeds.genres.push(g) };
-        // console.log(seeds);
-        $('input').val("");
-        $('h3').text("classified as: ");
     });
 }
