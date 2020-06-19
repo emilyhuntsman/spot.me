@@ -19,6 +19,43 @@ form {
     justify-content: center;
     height: 45px;
 }
+#dropdown {
+    overflow: hidden;
+    float: left;
+}
+
+#todrop {
+    color: black;
+    outline: none;
+    background-color: lightgray;
+    width: 60px;
+}
+
+#hidden {
+    display: none;
+}
+
+#dropdown:hover #hidden {
+    display: block;
+}
+
+#menu-content {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    width: 57px;
+    height: 21px;
+    background-color: darkgrey;
+    color: white;
+    border: solid black .05em;
+}
+
+a:hover {
+    color: rgb(222, 237, 222);
+}
 
 #circle {
     width: 63px;
@@ -27,6 +64,10 @@ form {
     border: 2px solid rgb(91, 200, 91); 
     transform: translate(-1px,-86px);
 
+}
+
+.artist {
+    padding-top: 15px;;
 }
 
 .container {
@@ -47,10 +88,8 @@ form {
 
 #faves, #recs {
     justify-content: center;
-    padding-top: 7px;
     padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 7px;
     background-color: white;
     border: solid #a1ab95 .1em;
     margin: 15px;
@@ -58,24 +97,22 @@ form {
     text-align: center;
 }
 
-/* #recs {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    width: fit-content;
-} */
-
 #recs {
     margin: 0 auto;
 }
 
-#recs ul {
+#rec-list ul {
     text-align: left;
     width: fit-content;
 }
 
 #recs h2 {
     width: 150px;
+}
+
+#rec-list {
+    display: flex;
+    justify-content: center;
 }
 
 #three-artists {
@@ -106,6 +143,18 @@ form {
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+.name-div {
+    flex-grow: 1;
+}
+
+.picture-div {
+    flex-grow: 1;
+}
+
+.list-div {
+    flex-grow: 1;
 }
 
 #three-artists ul {

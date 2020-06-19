@@ -5,15 +5,15 @@ This is just the beginning of my current project. As of now, I'm able to query t
 
 
 next:
-generate refreshed token on page open
-use artists id, common artist genres as seeds for recommendations
 allow user preferences to be used as criteria through sliders
-return list of five songs generated using API
 include web player
 carosel for recs
 
-ask about code organization
-naming of gihub account right now
+use local storage to keep track of previous playlists, keep data about artists, and track names
 
+css: bootstrap
 
-MVP:
+links to add:
+sourcecode link to github repo
+Home
+Previous playlists

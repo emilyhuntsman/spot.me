@@ -45,7 +45,7 @@ const getRecs = (userAccessToken,idList,seedG) => {
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
             const $ul= $('<ul>');
-            $('.playlist').append($ul);
+            $('#rec-list').append($ul);
             for (let track of data.tracks){
                 $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
             }

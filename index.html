@@ -9,12 +9,22 @@
     <title>Spot.Me</title>
 </head>
 <body>
-    <div id="menu-container">
-    </div>
     <div id="instructions">
         <marquee>
-            enter three of your favorite artists below to receive a personalized playlist
+            enter three of your favorite artists below to generate a personalized playlist
         </marquee>
+    </div>
+    <div id="menu-container">
+        <div id="dropdown">
+            <button id="todrop">menu<i class="fa fa-caret-down"></i></button>
+            <div id="hidden">
+                <div id="menu-content">
+                    <a href="https://root2point0.github.io/spot.me/">home</a>
+                    <a href="#">playlists</a>
+                    <a href="https://github.com/root2point0/spot.me">github</a>
+                </div>
+            </div>
+        </div>
     </div>
     <section id="logo">
         <h1 id="top">spot.me</h1>
@@ -30,34 +40,54 @@
         </form>
         <button id="submit" onclick="display()">Submit</button>
     </section>
-    <div class="container">
+    <hr>
+    <div class="artist container">
         <div id="faves">
             <h2>Your Artists</h2>
         </div>
     </div>
     <div class="container" id="three-artists">
         <section id="a1">
-            <h1 id="a1Header"></h1>
-            <img id="a1Img">
-            <h3></h3>
-            <ul id="a1List"></ul>
+            <div class="name-div">
+                <h1 id="a1Header"></h1>
+            </div>
+            <div class="picture-div">
+                <img id="a1Img">
+            </div>
+            <div class="list-div">
+                <h3></h3>
+                <ul id="a1List"></ul>
+            </div>
         </section>
         <section id="a2">
-            <h1 id="a2Header"></h1>
-            <img id="a2Img">
-            <h3></h3>
-            <ul id="a2List"></ul>
+            <div class="name-div">
+                <h1 id="a2Header"></h1>
+            </div>
+            <div class="picture-div">
+                <img id="a2Img">
+            </div>
+            <div class="list-div">
+                <h3></h3>
+                <ul id="a2List"></ul>
+            </div>
         </section>
         <section id="a3">
-            <h1 id="a3Header"></h1>
-            <img id="a3Img">
-            <h3></h3>
-            <ul id="a3List"></ul>
+            <div class="name-div">
+                <h1 id="a3Header"></h1>
+            </div>
+            <div class="picture-div">
+                <img id="a3Img">
+            </div>
+            <div class="list-div">
+                <h3></h3>
+                <ul id="a3List"></ul>
+            </div>
         </section>
     </div>
     <hr>
     <div class="playlist container">
         <div id="recs"></div>
+        <div id="rec-list"></div>
     </div>
 </body>
 </html>
