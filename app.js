@@ -42,6 +42,7 @@ const getRecs = (userAccessToken,idList,seedG,filter) => {
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", `Bearer ${userAccessToken}`)
         }, success: (data) => {
+            const playlist = { artists: idList, songs: [] };
             let trackCount = 0;
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
@@ -51,6 +52,7 @@ const getRecs = (userAccessToken,idList,seedG,filter) => {
                 for (let track of data.tracks){
                     if ((trackCount<10)&&(!idList.includes(track.artists[0].id))){
                         $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
+                        playlist.songs.push(`${track.name} by ${track.artists[0].name}`);
                         trackCount++;
                     }
                 }
@@ -60,10 +62,32 @@ const getRecs = (userAccessToken,idList,seedG,filter) => {
                     if (trackCount<10){
                         $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
                         trackCount++;
+                        playlist.songs.push(`${track.name} by ${track.artists[0].name}`);
                     }
                 }
             }
             
+            if ((localStorage.length) != 0){
+                const stored = JSON.parse(localStorage.getItem("playlists"));
+                if ((stored.length) == 1) {
+                    const stored = JSON.parse(localStorage.getItem("playlists"));
+                    stored.second = stored.first;
+                    stored.first = playlist;
+                    localStorage.setItem("playlists",JSON.stringify(stored));
+                }
+                else {
+                    stored.third = stored.second;
+                    stored.second = stored.first;
+                    stored.first = playlist;
+                    localStorage.setItem("playlists",JSON.stringify(stored));
+                }
+            }
+            else {
+                const stored = { first: playlist };
+                localStorage.setItem("playlists",JSON.stringify(stored));
+            }
+            const stored = JSON.parse(localStorage.getItem("playlists"));
+            console.log(stored);
         }
     })
 }
