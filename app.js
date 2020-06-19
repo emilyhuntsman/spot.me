@@ -34,26 +34,41 @@ const getGenreSeeds = (genreCount) => {
     return (genreSeeds);
 }
 
-const getRecs = (userAccessToken,idList,seedG) => {
+const getRecs = (userAccessToken,idList,seedG,filter) => {
     let seedUrl = "";
     (seedG.length == 0) ? "" : (seedG.length == 1) ? seedUrl = `seed_genres=${seedG[0]}` : seedUrl = `seed_genres=${seedG[0]},${seedG[1]}`;;
     $.ajax({
-        url: `https://api.spotify.com/v1/recommendations?limit=10&max_popularity=60&seed_artists=${idList[0]},${idList[1]},${idList[2]}&${seedUrl}`,
+        url: `https://api.spotify.com/v1/recommendations?limit=20&max_popularity=60&seed_artists=${idList[0]},${idList[1]},${idList[2]}&${seedUrl}`,
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", `Bearer ${userAccessToken}`)
         }, success: (data) => {
+            let trackCount = 0;
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
             const $ul= $('<ul>');
             $('#rec-list').append($ul);
-            for (let track of data.tracks){
-                $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
+            if (filter) {
+                for (let track of data.tracks){
+                    if ((trackCount<10)&&(!idList.includes(track.artists[0].id))){
+                        $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
+                        trackCount++;
+                    }
+                }
             }
+            else{
+                for (let track of data.tracks){
+                    if (trackCount<10){
+                        $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
+                        trackCount++;
+                    }
+                }
+            }
+            
         }
     })
 }
 
-const populatePage = (userAccessToken,artistList) => {
+const populatePage = (userAccessToken,filter) => {
     const htmlE = [ [$('#a1List'),$('#a1')], [$('#a2List'),$('#a2')], [$('#a3List'),$('#a3')] ];
     $('img').remove();
     $('ul').empty();
@@ -80,7 +95,7 @@ const populatePage = (userAccessToken,artistList) => {
             idList.push(values[i].artists.items[0].id);
         }
         let seedG = getGenreSeeds(genreCount);
-        getRecs(userAccessToken,idList,seedG);
+        getRecs(userAccessToken,idList,seedG,filter);
     });
     // clearing input fields
     $('input').val("");
@@ -89,9 +104,10 @@ const populatePage = (userAccessToken,artistList) => {
 
 const display = () => {
     const client_64 = "MjQ4M2E5OWU4Y2U2NGQ4ZmE2NjgxM2ZhZTY3ZjM2MTA6OGIwZDVjYjFmOTM4NDEyNThiNGJjMDBlMTAwZWVjOGY=";
-    artistList = [];
+    let filter;
+    ($('input[name="yn"]:checked').val()=="yes") ? filter = true : filter = false;
     getUserAccessToken(client_64).then((response) => {   
         const userAccessToken = response.access_token; 
-        populatePage(userAccessToken,artistList);
+        populatePage(userAccessToken,filter);
     });
 }
