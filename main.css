@@ -75,7 +75,7 @@ a:hover {
 
 }
 
-.artist {
+.artist, .local {
     padding-top: 15px;;
 }
 
@@ -94,8 +94,21 @@ a:hover {
     margin: 0 auto;
 }
 
+.local {
+    flex-direction: column;
+    align-items: center;
+}
 
-#faves, #recs {
+.play {
+    width: 33%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+} 
+
+#faves, #recs, #local {
     justify-content: center;
     padding-left: 10px;
     padding-right: 10px;
@@ -108,11 +121,17 @@ a:hover {
 
 #recs {
     margin: 0 auto;
+    margin-bottom: 10px;
 }
 
-#rec-list ul {
+#rec-list ul, .play ul {
     text-align: left;
     width: fit-content;
+}
+
+.play ul {
+    margin: auto;
+    padding-top: 15px;
 }
 
 #recs h2 {
@@ -189,4 +208,8 @@ section {
 h3 {
     margin-bottom: 0px;
     margin-top: 0px;
+}
+
+#myLists {
+    padding-top: 15px;
 }

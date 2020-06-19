@@ -34,7 +34,7 @@ const getGenreSeeds = (genreCount) => {
     return (genreSeeds);
 }
 
-const getRecs = (userAccessToken,idList,seedG,filter) => {
+const getRecs = (userAccessToken,idList,seedG,filter,fromArtists) => {
     let seedUrl = "";
     (seedG.length == 0) ? "" : (seedG.length == 1) ? seedUrl = `seed_genres=${seedG[0]}` : seedUrl = `seed_genres=${seedG[0]},${seedG[1]}`;;
     $.ajax({
@@ -42,7 +42,7 @@ const getRecs = (userAccessToken,idList,seedG,filter) => {
         beforeSend: (xhr) => {
             xhr.setRequestHeader("Authorization", `Bearer ${userAccessToken}`)
         }, success: (data) => {
-            const playlist = { artists: idList, songs: [] };
+            const playlist = { artists: fromArtists, songs: [] };
             let trackCount = 0;
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
@@ -66,7 +66,7 @@ const getRecs = (userAccessToken,idList,seedG,filter) => {
                     }
                 }
             }
-            
+
             if ((localStorage.length) != 0){
                 const stored = JSON.parse(localStorage.getItem("playlists"));
                 if ((stored.length) == 1) {
@@ -86,8 +86,26 @@ const getRecs = (userAccessToken,idList,seedG,filter) => {
                 const stored = { first: playlist };
                 localStorage.setItem("playlists",JSON.stringify(stored));
             }
+            $('#myLists').empty();
             const stored = JSON.parse(localStorage.getItem("playlists"));
             console.log(stored);
+            if ((localStorage.length) != 0){
+                console.log("length: "+Object.keys(stored).length);
+                Object.keys(stored).forEach((key) => {
+                    if (key != "first"){
+                        const $div = $('<div>').attr("class","play");
+                        $('#myLists').append($div);
+                        $div.append($('<h3>').text(`${stored[key].artists[0]}`));
+                        $div.append($('<h3>').text(`${stored[key].artists[1]}`));
+                        $div.append($('<h3>').text(`${stored[key].artists[2]}`));
+                        const $ul = $('<ul>');
+                        $div.append($ul);
+                        for (let song of stored[key].songs){
+                            $ul.append($('<li>').text(song));
+                        }
+                    }
+                });
+            }
         }
     })
 }
@@ -107,6 +125,7 @@ const populatePage = (userAccessToken,filter) => {
     const promise3 = getInfo(userAccessToken,($('#third').val()));
     Promise.all([promise1,promise2,promise3]).then((values) => {
         const idList = [];
+        const fromArtists = [];
         const genreCount = {};
         for (let i = 0; i < values.length; i++){
             for (let genre of values[i].artists.items[0].genres) {
@@ -117,9 +136,10 @@ const populatePage = (userAccessToken,filter) => {
             const $img = $('<img>').attr("src",values[i].artists.items[0].images[0].url).attr("id","picture");
             htmlE[i][1].prepend($img);
             idList.push(values[i].artists.items[0].id);
+            fromArtists.push(values[i].artists.items[0].name);
         }
         let seedG = getGenreSeeds(genreCount);
-        getRecs(userAccessToken,idList,seedG,filter);
+        getRecs(userAccessToken,idList,seedG,filter,fromArtists);
     });
     // clearing input fields
     $('input').val("");
@@ -135,3 +155,24 @@ const display = () => {
         populatePage(userAccessToken,filter);
     });
 }
+
+$(() => {
+    $('#myLists').empty();
+    const stored = JSON.parse(localStorage.getItem("playlists"));
+    console.log(stored);
+    if ((localStorage.length) != 0){
+        console.log("length: "+Object.keys(stored).length);
+        Object.keys(stored).forEach((key) => {
+            const $div = $('<div>').attr("class","play");
+            $('#myLists').append($div);
+            $div.append($('<h3>').text(`${stored[key].artists[0]}`));
+            $div.append($('<h3>').text(`${stored[key].artists[1]}`));
+            $div.append($('<h3>').text(`${stored[key].artists[2]}`));
+            const $ul = $('<ul>');
+            $div.append($ul);
+            for (let song of stored[key].songs){
+                $ul.append($('<li>').text(song));
+            }
+        });
+    }
+})
