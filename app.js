@@ -47,7 +47,8 @@ const getRecs = (userAccessToken,idList,seedG,filter,fromArtists) => {
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
             const $ul= $('<ul>');
-            $('#rec-list').append($ul);
+
+            $('#rec-list').empty().append($ul);
             if (filter) {
                 for (let track of data.tracks){
                     if ((trackCount<10)&&(!idList.includes(track.artists[0].id))){
