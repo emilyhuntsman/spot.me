@@ -38,8 +38,15 @@
             <input type="text" id="second"/>
             <input type="text" id="third"/>
         </form>
-        <button id="submit" onclick="display()">Submit</button>
     </section>
+    <div id="tuning">
+        <form>
+            <label>Do you want your playlist to filter out songs by these artists?</label>
+            <input type="radio" id="yes" value="yes" name="yn"><label id="yes-label">yes</label></input>
+            <input type="radio" id="no" value="no" name="yn"><label id="no-label">no</label></input>
+        </form>
+        <button id="submit" onclick="display()">Submit</button>
+    </div>
     <hr>
     <div class="artist container">
         <div id="faves">
