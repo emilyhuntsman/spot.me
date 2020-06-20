@@ -87,7 +87,6 @@ a:hover {
 }
 
 .playlist {
-    padding-top: 30px;
     background-color: white;
     flex-direction: column; 
     width: 50%;
@@ -132,6 +131,10 @@ a:hover {
 .play ul {
     margin: auto;
     padding-top: 15px;
+}
+
+ol li {
+    padding-left: 5px;
 }
 
 #recs h2 {

@@ -46,13 +46,13 @@ const getRecs = (userAccessToken,idList,seedG,filter,fromArtists) => {
             let trackCount = 0;
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
-            const $ul= $('<ul>');
+            const $ol= $('<ol>');
 
-            $('#rec-list').empty().append($ul);
+            $('#rec-list').empty().append($ol);
             if (filter) {
                 for (let track of data.tracks){
                     if ((trackCount<10)&&(!idList.includes(track.artists[0].id))){
-                        $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
+                        $ol.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
                         playlist.songs.push(`${track.name} by ${track.artists[0].name}`);
                         trackCount++;
                     }
@@ -61,7 +61,7 @@ const getRecs = (userAccessToken,idList,seedG,filter,fromArtists) => {
             else{
                 for (let track of data.tracks){
                     if (trackCount<10){
-                        $ul.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
+                        $ol.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
                         trackCount++;
                         playlist.songs.push(`${track.name} by ${track.artists[0].name}`);
                     }
@@ -151,6 +151,7 @@ const display = () => {
     const client_64 = "MjQ4M2E5OWU4Y2U2NGQ4ZmE2NjgxM2ZhZTY3ZjM2MTA6OGIwZDVjYjFmOTM4NDEyNThiNGJjMDBlMTAwZWVjOGY=";
     let filter;
     ($('input[name="yn"]:checked').val()=="yes") ? filter = true : filter = false;
+    // only let's you filter out once...must fix
     console.log("filter: "+filter);
     $('input[name="yn"]:checked').prop("checked", false);
     getUserAccessToken(client_64).then((response) => {   
@@ -162,9 +163,7 @@ const display = () => {
 $(() => {
     $('#myLists').empty();
     const stored = JSON.parse(localStorage.getItem("playlists"));
-    console.log(stored);
     if ((localStorage.length) != 0){
-        console.log("length: "+Object.keys(stored).length);
         Object.keys(stored).forEach((key) => {
             const $div = $('<div>').attr("class","play");
             $('#myLists').append($div);
