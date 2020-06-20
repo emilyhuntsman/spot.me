@@ -151,6 +151,8 @@ const display = () => {
     const client_64 = "MjQ4M2E5OWU4Y2U2NGQ4ZmE2NjgxM2ZhZTY3ZjM2MTA6OGIwZDVjYjFmOTM4NDEyNThiNGJjMDBlMTAwZWVjOGY=";
     let filter;
     ($('input[name="yn"]:checked').val()=="yes") ? filter = true : filter = false;
+    console.log("filter: "+filter);
+    $('input[name="yn"]:checked').prop("checked", false);
     getUserAccessToken(client_64).then((response) => {   
         const userAccessToken = response.access_token; 
         populatePage(userAccessToken,filter);
