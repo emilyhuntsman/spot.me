@@ -34,16 +34,15 @@
     </section>
     <section id="input">
         <form>
-            <input type="text" id="first"/>
-            <input type="text" id="second"/>
-            <input type="text" id="third"/>
+            <input class="tbox" type="text" id="first"/>
+            <input class="tbox" type="text" id="second"/>
+            <input class="tbox" type="text" id="third"/>
         </form>
     </section>
     <div id="tuning">
         <form>
             <label>Do you want your playlist to filter out songs by these artists?</label>
-            <input type="radio" id="yes" value="yes" name="yn"><label id="yes-label">yes</label></input>
-            <input type="radio" id="no" value="no" name="yn"><label id="no-label">no</label></input>
+            <input type="checkbox" id="yes" value="yes" name="yes"><label>yes</label></input>
         </form>
         <button id="submit" onclick="display()">Submit</button>
     </div>
@@ -84,7 +83,6 @@
     </div>
     <hr>
     <div class="playlist container">
-        <!-- <div id="recs"></div> -->
         <div id="rec-list"></div>
     </div>
     <hr>

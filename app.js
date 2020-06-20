@@ -47,7 +47,6 @@ const getRecs = (userAccessToken,idList,seedG,filter,fromArtists) => {
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
             const $ol= $('<ol>');
-
             $('#rec-list').empty().append($ol);
             if (filter) {
                 for (let track of data.tracks){
@@ -89,9 +88,7 @@ const getRecs = (userAccessToken,idList,seedG,filter,fromArtists) => {
             }
             $('#myLists').empty();
             const stored = JSON.parse(localStorage.getItem("playlists"));
-            console.log(stored);
             if ((localStorage.length) != 0){
-                console.log("length: "+Object.keys(stored).length);
                 Object.keys(stored).forEach((key) => {
                     if (key != "first"){
                         const $div = $('<div>').attr("class","play");
@@ -143,17 +140,15 @@ const populatePage = (userAccessToken,filter) => {
         getRecs(userAccessToken,idList,seedG,filter,fromArtists);
     });
     // clearing input fields
-    $('input').val("");
+    $('.tbox').val("");
     $('h3').text("classified as: ");
 }
 
 const display = () => {
     const client_64 = "MjQ4M2E5OWU4Y2U2NGQ4ZmE2NjgxM2ZhZTY3ZjM2MTA6OGIwZDVjYjFmOTM4NDEyNThiNGJjMDBlMTAwZWVjOGY=";
     let filter;
-    ($('input[name="yn"]:checked').val()=="yes") ? filter = true : filter = false;
-    // only let's you filter out once...must fix
-    console.log("filter: "+filter);
-    $('input[name="yn"]:checked').prop("checked", false);
+    ($('input[name="yes"]:checked').val() == "yes") ? filter = true : filter = false;
+    $('input[name="yes"]:checked').prop("checked", false);
     getUserAccessToken(client_64).then((response) => {   
         const userAccessToken = response.access_token; 
         populatePage(userAccessToken,filter);
