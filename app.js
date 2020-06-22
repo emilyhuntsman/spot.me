@@ -146,6 +146,9 @@ const populatePage = (userAccessToken,filter,popular) => {
 }
 
 const display = () => {
+    if (($('#first').val()=="")||($('#second').val()=="")||($('#third').val()=="")) {
+        alert("please enter three valid artists"); return;
+    }
     const client_64 = "MjQ4M2E5OWU4Y2U2NGQ4ZmE2NjgxM2ZhZTY3ZjM2MTA6OGIwZDVjYjFmOTM4NDEyNThiNGJjMDBlMTAwZWVjOGY=";
     let filter; let popular;
     ($('input[name="filt"]:checked').val() == "yes") ? filter = true : filter = false;
