@@ -1,19 +1,5 @@
 # spot.me
-project using Spotify API for recommendations
+project using Spotify API for song recommendations
 
-This is just the beginning of my current project. As of now, I'm able to query three musical artists from the user and grab data including genres and pictures, from the API. My plan is to figure out how to use that data to create recommendations for the user in the future.
-
-
-next:
-allow user preferences to be used as criteria through sliders
-include web player
-carosel for recs
-
-use local storage to keep track of previous playlists, keep data about artists, and track names
-
-css: bootstrap
-
-links to add:
-sourcecode link to github repo
-Home
-Previous playlists
+As of now, I'm able to query three musical artists from the user and grab data including genres and pictures, from the Spotify API. Those artist ids and any common genres are used as seeds, along with a few questions the user answers, that are fed into a second endpoint to generate a personalized playlist. Each time the page is page is refreshed, a new token is checkout out through an ajax call, gauranteeing that it will never expire during a session. Local storage has been implemented to keep track of and display the last three playlists the user has generated along with the artists the songs are seeded from. 
+Potential next steps would be to look into adding a spotify web player that would have the most recently generated playlist pre-loaded for easy in-browser listening.
