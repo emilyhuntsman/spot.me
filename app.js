@@ -104,7 +104,14 @@ const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
                     stored.first = playlist;
                     localStorage.setItem("playlists",JSON.stringify(stored));
                 }
+                else if ((stored.length) == 2){
+                    stored.third = stored.second;
+                    stored.second = stored.first;
+                    stored.first = playlist;
+                    localStorage.setItem("playlists",JSON.stringify(stored));
+                }
                 else {
+                    stored.fourth = stored.third;
                     stored.third = stored.second;
                     stored.second = stored.first;
                     stored.first = playlist;
@@ -194,16 +201,18 @@ $(() => {
     const stored = JSON.parse(localStorage.getItem("playlists"));
     if ((localStorage.length) != 0){
         Object.keys(stored).forEach((key) => {
-            const $div = $('<div>').attr("class","play");
-            $('#myLists').append($div);
-            $div.append($('<h3>').text(`${stored[key].artists[0]}`));
-            $div.append($('<h3>').text(`${stored[key].artists[1]}`));
-            $div.append($('<h3>').text(`${stored[key].artists[2]}`));
-            const $ul = $('<ul>');
-            $div.append($ul);
-            for (let song of stored[key].songs){
-                $ul.append($('<li>').text(song));
-            }
+            if (key != "fourth"){
+                const $div = $('<div>').attr("class","play");
+                $('#myLists').append($div);
+                $div.append($('<h3>').text(`${stored[key].artists[0]}`));
+                $div.append($('<h3>').text(`${stored[key].artists[1]}`));
+                $div.append($('<h3>').text(`${stored[key].artists[2]}`));
+                const $ul = $('<ul>');
+                $div.append($ul);
+                for (let song of stored[key].songs){
+                    $ul.append($('<li>').text(song));
+                }
+            }   
         });
     }
 })
