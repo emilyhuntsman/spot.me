@@ -88,9 +88,10 @@ a:hover {
 
 .playlist {
     background-color: white;
-    flex-direction: column; 
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
+    padding-top: 28px;
+    padding-bottom: 20px;
 }
 
 .local {
@@ -144,6 +145,8 @@ ol li {
 #rec-list {
     display: flex;
     justify-content: center;
+    width: 40%;
+    align-items: center;
 }
 
 #three-artists {
@@ -217,6 +220,26 @@ h3 {
 #myLists {
     padding-top: 15px;
     padding-bottom: 30px;
+}
+
+/* used w3schools to research how to carousel */
+.slide {
+    display: none;
+}
+
+.prev, .next {
+    cursor: pointer;
+    width: auto;
+    top: 50%;
+    font-weight: bold;
+}
+
+.next {
+    right:0;
+}
+
+#carousel-container {
+    width: 40%;
 }
 
 @media only screen and (max-width: 768px) {

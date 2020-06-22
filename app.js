@@ -1,3 +1,6 @@
+// global var: slide num
+let slideNum = 0;
+
 const getUserAccessToken = (client_64) => {
     const resp = $.ajax({
         url: "https://accounts.spotify.com/api/token",
@@ -34,6 +37,23 @@ const getGenreSeeds = (genreCount) => {
     return (genreSeeds);
 }
 
+// the following two functions reference slideshow by w3schools with edits
+
+const displaySlide = (slideI) => {
+    const $slides = $('.slide');
+    for (let i = 0; i < $slides.length; i++){
+        $slides[i].style.display = "none";
+    }
+    $slides[slideI].style.display = "block";
+}
+
+const nextImage = (shift) => {
+    const index = slideNum + shift;
+    if ((index >= 0) && (index < 10)) {
+        displaySlide(slideNum += shift);
+    }
+}
+
 const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
     let seedUrl = ""; let popUrl = "";
     (seedG.length == 0) ? "" : (seedG.length == 1) ? seedUrl = `&seed_genres=${seedG[0]}` : seedUrl = `&seed_genres=${seedG[0]},${seedG[1]}`;;
@@ -55,6 +75,8 @@ const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
                         $ol.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
                         playlist.songs.push(`${track.name} by ${track.artists[0].name}`);
                         trackCount++;
+                        const $slide = $('<div>').attr("class","slide").append($('<img>').attr("src",track.album.images[0].url));
+                        $('#carousel-container').append($slide);
                     }
                 }
             }
@@ -64,9 +86,15 @@ const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
                         $ol.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
                         trackCount++;
                         playlist.songs.push(`${track.name} by ${track.artists[0].name}`);
+                        const $slide = $('<div>').append($('<img>').attr("src",track.album.images[0].url));
+                        $('#carousel-container').append($slide);
                     }
                 }
             }
+            const $prev = $('<a>').attr("class","prev").attr("onclick","nextImage(-1)").text("<");
+            const $next = $('<a>').attr("class","next").attr("onclick","nextImage(1)").text(">");
+            $('#carousel-container').append($prev).append($next);
+            displaySlide(slideNum);
 
             if ((localStorage.length) != 0){
                 const stored = JSON.parse(localStorage.getItem("playlists"));
