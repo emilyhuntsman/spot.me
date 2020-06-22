@@ -218,3 +218,15 @@ h3 {
     padding-top: 15px;
     padding-bottom: 30px;
 }
+
+@media only screen and (max-width: 768px) {
+    /* phone screens change to column instead of row in saved playlist section */
+    #myLists {
+        flex-direction: column;
+        align-items: center;
+    }
+    .play {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
