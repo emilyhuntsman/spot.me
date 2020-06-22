@@ -252,4 +252,11 @@ h3 {
         padding-top: 15px;
         padding-bottom: 15px;
     }
+    .playlist {
+        flex-direction: column;
+        align-items: center;
+    }
+    #carousel-container {
+        padding-top: 15px;
+    }
 }
