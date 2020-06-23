@@ -1,5 +1,8 @@
-// global var: slide num
+// global variables
 let slideNum = 0;
+let filter; 
+let popular;
+
 
 const getUserAccessToken = (client_64) => {
     const resp = $.ajax({
@@ -54,7 +57,7 @@ const nextImage = (shift) => {
     }
 }
 
-const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
+const getRecs = (userAccessToken,idList,seedG,fromArtists) => {
     let seedUrl = ""; let popUrl = "";
     (seedG.length == 0) ? "" : (seedG.length == 1) ? seedUrl = `&seed_genres=${seedG[0]}` : seedUrl = `&seed_genres=${seedG[0]},${seedG[1]}`;;
     if (!popular) { popUrl = "&max_popularity=40" }
@@ -64,7 +67,7 @@ const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
             xhr.setRequestHeader("Authorization", `Bearer ${userAccessToken}`)
         }, success: (data) => {
             const playlist = { artists: fromArtists, songs: [] };
-            let trackCount = 0;
+            let trackCount = 0; slideNum = 0;
             $('#recs').empty();
             $('#recs').append($('<h2>').text("Your Playlist"));
             const $ol= $('<ol>');
@@ -145,7 +148,7 @@ const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
     })
 }
 
-const populatePage = (userAccessToken,filter,popular) => {
+const populatePage = (userAccessToken) => {
     const htmlE = [ [$('#a1List'),$('#a1')], [$('#a2List'),$('#a2')], [$('#a3List'),$('#a3')] ];
     $('img').remove();
     $('ul').empty();
@@ -174,7 +177,7 @@ const populatePage = (userAccessToken,filter,popular) => {
             fromArtists.push(values[i].artists.items[0].name);
         }
         let seedG = getGenreSeeds(genreCount);
-        getRecs(userAccessToken,idList,seedG,filter,popular,fromArtists);
+        getRecs(userAccessToken,idList,seedG,fromArtists);
     });
     // clearing input fields
     $('.tbox').val("");
@@ -186,14 +189,13 @@ const display = () => {
         alert("please enter three valid artists"); return;
     }
     const client_64 = "MjQ4M2E5OWU4Y2U2NGQ4ZmE2NjgxM2ZhZTY3ZjM2MTA6OGIwZDVjYjFmOTM4NDEyNThiNGJjMDBlMTAwZWVjOGY=";
-    let filter; let popular;
     ($('input[name="filt"]:checked').val() == "yes") ? filter = true : filter = false;
     $('input[name="filt"]:checked').prop("checked", false);
     ($('input[name="pop"]:checked').val() == "yes") ? popular = false : popular = true;
     $('input[name="pop"]:checked').prop("checked", false);
     getUserAccessToken(client_64).then((response) => {   
         const userAccessToken = response.access_token; 
-        populatePage(userAccessToken,filter,popular);
+        populatePage(userAccessToken);
     });
 }
 
