@@ -69,6 +69,7 @@ const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
             $('#recs').append($('<h2>').text("Your Playlist"));
             const $ol= $('<ol>');
             $('#rec-list').empty().append($ol);
+            $('#carousel-container').empty();
             if (filter) {
                 for (let track of data.tracks){
                     if ((trackCount<10)&&(!idList.includes(track.artists[0].id))){
@@ -86,7 +87,7 @@ const getRecs = (userAccessToken,idList,seedG,filter,popular,fromArtists) => {
                         $ol.append($('<li>').text(`${track.name} by ${track.artists[0].name}`));
                         trackCount++;
                         playlist.songs.push(`${track.name} by ${track.artists[0].name}`);
-                        const $slide = $('<div>').append($('<img>').attr("src",track.album.images[0].url));
+                        const $slide = $('<div>').attr("class","slide").append($('<img>').attr("src",track.album.images[0].url));
                         $('#carousel-container').append($slide);
                     }
                 }
